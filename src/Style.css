@@ -1,0 +1,7 @@
+.page-banner {
+  background: url(./assets//sous-chef.png);
+  background-size: cover;
+  background-position: center center;
+  width: 100%;
+  height: 600px;
+}
