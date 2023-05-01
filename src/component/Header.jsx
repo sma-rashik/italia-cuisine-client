@@ -54,10 +54,12 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <a className="btn mr-5" to="/login">
+          <Link className="btn mr-5" to="/login">
             Sign In
-          </a>
-          <a className="btn">Sign UP</a>
+          </Link>
+          <Link className="btn" to="/register">
+            Sign UP
+          </Link>
         </div>
       </div>
     </div>
