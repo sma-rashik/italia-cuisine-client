@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import SocialButton from "../SocialButton/SocialButton";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
@@ -55,7 +56,7 @@ const Login = () => {
                   <span className="label-text">Password</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="password"
                   className="input input-bordered"
                   name="password"
@@ -69,11 +70,10 @@ const Login = () => {
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
-              {error && (
-                <p className="text-red-500 text-sm mt-4">{error}</p>
-              )}
+              {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
             </form>
           </div>
+          <SocialButton />
         </div>
       </div>
     </div>

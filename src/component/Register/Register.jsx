@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useState } from "react";
+import SocialButton from "../SocialButton/SocialButton";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
@@ -71,7 +72,7 @@ const Register = () => {
                     <span className="label-text">Password</span>
                   </label>
                   <input
-                    type="text"
+                    type="password"
                     placeholder="password"
                     className="input input-bordered"
                     name="password"
@@ -87,6 +88,7 @@ const Register = () => {
                 </div>
               </form>
             </div>
+            <SocialButton />
             {error && <div className="text-red-500 text-sm mt-4">{error}</div>}
           </div>
         </div>

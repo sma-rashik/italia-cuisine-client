@@ -64,9 +64,15 @@ const Header = () => {
               Log Out
             </Link>
           ) : (
-            <Link className="btn mr-5" to="/login">
-              Sign In/Sign Up
-            </Link>
+            <div>
+              {" "}
+              <Link className="btn mr-5" to="/login">
+                Sign In
+              </Link>{" "}
+              <Link className="btn mr-5" to="/register">
+                Sign Up
+              </Link>
+            </div>
           )}
         </div>
       </div>
