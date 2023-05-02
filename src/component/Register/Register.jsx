@@ -1,7 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+import { useState } from "react";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
+  const [error, setError] = useState(null);
+
+  const handleRegister = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+    try {
+      if (createUser) {
+        const result = createUser(email, password);
+        const loggedUser = result.user;
+        console.log(loggedUser);
+      } else {
+        throw new Error("createUser function not found in AuthContext");
+      }
+    } catch (error) {
+      console.log(error);
+      setError(error.message);
+    }
+  };
   return (
     <div>
       <div>
@@ -20,7 +45,7 @@ const Register = () => {
           <div className="hero-content flex-col w-3/4">
             <h1 className="text-5xl mb-5">Register Here</h1>
             <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-              <div className="card-body">
+              <form onSubmit={handleRegister} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -29,14 +54,16 @@ const Register = () => {
                     type="text"
                     placeholder="name"
                     className="input input-bordered"
-                  />{" "}
+                    name="name"
+                  />
                   <label className="label">
                     <span className="label-text">Email</span>
                   </label>
                   <input
-                    type="text"
+                    type="email"
                     placeholder="email"
                     className="input input-bordered"
+                    name="email"
                   />
                 </div>
                 <div className="form-control">
@@ -47,18 +74,20 @@ const Register = () => {
                     type="text"
                     placeholder="password"
                     className="input input-bordered"
+                    name="password"
                   />
                   <label className="label">
-                    <a href="#" className="label-text-alt link link-hover">
+                    <p className="label-text-alt link link-hover">
                       Already Have an account?<Link to="/login">Login Now</Link>
-                    </a>
+                    </p>
                   </label>
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  <button className="btn btn-primary">Register</button>
                 </div>
-              </div>
+              </form>
             </div>
+            {error && <div className="text-red-500 text-sm mt-4">{error}</div>}
           </div>
         </div>
       </div>

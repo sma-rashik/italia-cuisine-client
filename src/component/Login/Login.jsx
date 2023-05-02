@@ -1,6 +1,26 @@
-import React from "react";
+import React, { useContext, useState } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(email, password);
+    signIn(email, password)
+      .then((result) => {
+        const loggedUser = result.user;
+        console.log(loggedUser);
+        form.reset();
+      })
+      .catch((error) => {
+        setError(error);
+      });
+  };
   return (
     <div>
       <div className="page-banner  min-h-screen">
@@ -18,15 +38,16 @@ const Login = () => {
         <div className="hero-content flex-col w-3/4">
           <h1 className="text-5xl mb-5">Please Login</h1>
           <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
+            <form onSubmit={handleLogin} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="email"
                   className="input input-bordered"
+                  name="email"
                 />
               </div>
               <div className="form-control">
@@ -37,17 +58,21 @@ const Login = () => {
                   type="text"
                   placeholder="password"
                   className="input input-bordered"
+                  name="password"
                 />
                 <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
+                  <Link href="#" className="label-text-alt link link-hover">
+                    Create an Account!!
+                  </Link>
                 </label>
               </div>
               <div className="form-control mt-6">
                 <button className="btn btn-primary">Login</button>
               </div>
-            </div>
+              {error && (
+                <p className="text-red-500 text-sm mt-4">{error}</p>
+              )}
+            </form>
           </div>
         </div>
       </div>
