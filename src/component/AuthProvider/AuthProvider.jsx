@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
+  const logOut = () => {
     signOut(auth)
       .then(() => {})
       .catch((error) => {
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
     user,
     createUser,
     signIn,
-    logout,
+    logOut,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
