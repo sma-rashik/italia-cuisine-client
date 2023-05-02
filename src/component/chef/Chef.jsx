@@ -1,11 +1,12 @@
 import React from "react";
 import { FaCheck, FaThumbsUp } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Chef = ({ chef }) => {
   const { name, picture, id, experience_years, num_recipes, likes } = chef;
   return (
     <div>
-      <div className="mt-10 card card-compact w-96 bg-base-100 shadow-xl">
+      <div className=" mb-10 card card-compact w-96 bg-base-100 shadow-xl">
         <figure>
           <img className="h-64 w-64 " src={picture} alt="Chef" />
         </figure>
@@ -18,9 +19,14 @@ const Chef = ({ chef }) => {
             <p className="flex text-lg gap-2">
               <FaCheck className="mt-1" /> Number of Recipes: {num_recipes}
             </p>
-            <p className="flex text-lg gap-2">
-              <FaThumbsUp className="mt-1" /> Total Likes: {likes}
+            <p className="flex ml-20 mt-4 text-center text-lg gap-2">
+              <FaThumbsUp className="mt-1 text-red-600" /> Total Likes: {likes}
             </p>
+          </div>
+          <div className="card-actions justify-end">
+            <Link to="${chefId}" className="btn btn-link">
+              See All Recipes
+            </Link>
           </div>
         </div>
       </div>

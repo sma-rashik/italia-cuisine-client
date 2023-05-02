@@ -3,6 +3,8 @@ import Layout from "../component/Layout";
 import Home from "../component/Home";
 import Login from "../component/Login/Login";
 import Register from "../component/Register/Register";
+import ChefDetails from "../component/ChefDetails/ChefDetails";
+import Blog from "../component/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,30 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
+      {
+        path: "/chef/:chefId",
+        element: <ChefDetails></ChefDetails>,
+        loader: async ({ params }) => {
+          try {
+            const response = await fetch("http://localhost:4000/chef");
+            const data = await response.json();
+
+            if (!Array.isArray(data)) {
+              throw new Error("Data is not an array.");
+            }
+            const chefs = data.filter((chef) => chef.id == params.chefId);
+
+            return chefs || null;
+          } catch (error) {
+            console.error(error);
+            return null;
+          }
+        },
       },
     ],
   },
