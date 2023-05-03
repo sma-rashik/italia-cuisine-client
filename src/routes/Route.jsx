@@ -5,11 +5,13 @@ import Login from "../component/Login/Login";
 import Register from "../component/Register/Register";
 import ChefDetails from "../component/ChefDetails/ChefDetails";
 import Blog from "../component/Blog/Blog";
+import ErrorPage from "../component/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -38,8 +40,8 @@ const router = createBrowserRouter([
             if (!Array.isArray(data)) {
               throw new Error("Data is not an array.");
             }
-            const chefs = data.filter((chef) => chef.id == params.chefId);
-
+            const chefs = data.filter((chef) => chef.chefs.id == params.chefId);
+            console.log(chefs);
             return chefs || null;
           } catch (error) {
             console.error(error);
