@@ -1,13 +1,19 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { AuthContext } from "./AuthProvider/AuthProvider";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const location = useLocation();
   console.log(user);
   const handleLogOut = () => {
     logOut();
   };
+
+  const isActiveRoute = (route) => {
+    return location.pathname === route;
+  };
+
   return (
     <div>
       <div className="navbar bg-base-100">
@@ -34,13 +40,17 @@ const Header = () => {
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <a>Home</a>
+                <Link to="/" className={isActiveRoute("/") ? "active" : ""}>
+                  Home
+                </Link>
               </li>
               <li>
-                <Link to="/blog">Blog </Link>
-              </li>
-              <li>
-                <a>Contact </a>
+                <Link
+                  to="/blog"
+                  className={isActiveRoute("/blog") ? "active" : ""}
+                >
+                  Blog
+                </Link>
               </li>
             </ul>
           </div>
@@ -49,13 +59,17 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
             <li>
-              <Link>Home</Link>
+              <Link className={isActiveRoute("/") ? "active" : ""} to="/">
+                Home
+              </Link>
             </li>
             <li>
-              <Link to="/blog">Blog </Link>
-            </li>
-            <li>
-              <a>Contact</a>
+              <Link
+                className={isActiveRoute("/blog") ? "active" : ""}
+                to="/blog"
+              >
+                Blog
+              </Link>
             </li>
           </ul>
         </div>
@@ -65,7 +79,7 @@ const Header = () => {
               <div className="avatar">
                 <div className="w-8  rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   {user.photoURL ? (
-                    <img src={user.photoURL} />
+                    <img src={user.photoURL} alt={user.displayName} />
                   ) : (
                     <img src="https://i.ibb.co/zRCMzv0/download.jpg" alt="" />
                   )}

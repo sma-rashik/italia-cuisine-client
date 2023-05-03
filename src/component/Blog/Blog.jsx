@@ -1,6 +1,16 @@
 import React from "react";
+import { toPdf } from "react-to-pdf";
 
 const Blog = () => {
+  const handleDownload = async () => {
+    const pdf = await toPdf(componentRef.current, {});
+
+    const blob = new Blob([pdf], { type: "application/pdf" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "blog.pdf";
+    link.click();
+  };
   return (
     <div>
       <div className="page-banner w-full">
@@ -21,6 +31,9 @@ const Blog = () => {
             own state internally using the DOM API, and their state is not
             directly controlled by React.
           </p>
+          <button onClick={handleDownload} className="btn btn-link">
+            Download PDF
+          </button>
         </div>
       </div>
 

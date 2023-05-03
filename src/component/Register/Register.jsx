@@ -13,6 +13,7 @@ const Register = () => {
     const form = event.target;
     const name = form.name.value;
     const email = form.email.value;
+    const photo = form.photo.value;
     const password = form.password.value;
 
     // Validate input
@@ -60,11 +61,11 @@ const Register = () => {
               <form onSubmit={handleRegister} className="card-body">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Photo URL</span>
+                    <span className="label-text">Name</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="Photo URL"
+                    placeholder="name"
                     className="input input-bordered"
                     name="name"
                   />
@@ -87,6 +88,15 @@ const Register = () => {
                     placeholder="password"
                     className="input input-bordered"
                     name="password"
+                  />{" "}
+                  <label className="label">
+                    <span className="label-text">Photo Url</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Photo Url"
+                    className="input input-bordered"
+                    name="photo"
                   />
                   {error && (
                     <div className="text-red-500 text-sm mt-4">{error}</div>
