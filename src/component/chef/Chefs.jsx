@@ -15,7 +15,7 @@ const Chefs = () => {
       <div className="text-5xl text-center underline mt-10">
         <h1>Meet Italian Chefs</h1>
       </div>
-      <div className="grid grid-cols-3 mt-32 p-4 ml-10">
+      <div className="grid md:grid-cols-3 mt-32 p-4 ml-10">
         {chefs.map((chef) => (
           <Chef key={chef.id} chef={chef} />
         ))}

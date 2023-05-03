@@ -32,22 +32,8 @@ const router = createBrowserRouter([
       {
         path: "/chef/:chefId",
         element: <ChefDetails></ChefDetails>,
-        loader: async ({ params }) => {
-          try {
-            const response = await fetch("http://localhost:4000/chef");
-            const data = await response.json();
-
-            if (!Array.isArray(data)) {
-              throw new Error("Data is not an array.");
-            }
-            const chefs = data.filter((chef) => chef.chefs.id == params.chefId);
-            console.log(chefs);
-            return chefs || null;
-          } catch (error) {
-            console.error(error);
-            return null;
-          }
-        },
+        loader: ({ params }) =>
+          fetch(`http://localhost:4000/chef/${params.chefId}`),
       },
     ],
   },
