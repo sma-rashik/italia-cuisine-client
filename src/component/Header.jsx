@@ -63,11 +63,15 @@ const Header = () => {
           {user ? (
             <div>
               <div className="avatar">
-                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                  <img src={user.photoURL} />
+                <div className="w-8  rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                  {user.photoURL ? (
+                    <img src={user.photoURL} />
+                  ) : (
+                    <img src="https://i.ibb.co/zRCMzv0/download.jpg" alt="" />
+                  )}
                 </div>
               </div>
-              <Link onClick={handleLogOut} className="btn">
+              <Link onClick={handleLogOut} className="btn ml-4">
                 Log Out
               </Link>{" "}
             </div>

@@ -14,7 +14,17 @@ const Register = () => {
     const name = form.name.value;
     const email = form.email.value;
     const password = form.password.value;
-    console.log(name, email, password);
+
+    // Validate input
+    if (password.length < 6) {
+      setError("Password must be at least 6 characters");
+      return;
+    }
+    if (!email || !password) {
+      setError("Email and password are required");
+      return;
+    }
+
     try {
       if (createUser) {
         const result = createUser(email, password);
@@ -28,6 +38,7 @@ const Register = () => {
       setError(error.message);
     }
   };
+
   return (
     <div>
       <div>
@@ -49,11 +60,11 @@ const Register = () => {
               <form onSubmit={handleRegister} className="card-body">
                 <div className="form-control">
                   <label className="label">
-                    <span className="label-text">Name</span>
+                    <span className="label-text">Photo URL</span>
                   </label>
                   <input
                     type="text"
-                    placeholder="name"
+                    placeholder="Photo URL"
                     className="input input-bordered"
                     name="name"
                   />
@@ -77,9 +88,15 @@ const Register = () => {
                     className="input input-bordered"
                     name="password"
                   />
+                  {error && (
+                    <div className="text-red-500 text-sm mt-4">{error}</div>
+                  )}
                   <label className="label">
                     <p className="label-text-alt link link-hover">
-                      Already Have an account?<Link to="/login">Login Now</Link>
+                      <Link to="/login">
+                        {" "}
+                        Already Have an account?Login Now
+                      </Link>
                     </p>
                   </label>
                 </div>
@@ -89,7 +106,6 @@ const Register = () => {
               </form>
             </div>
             <SocialButton />
-            {error && <div className="text-red-500 text-sm mt-4">{error}</div>}
           </div>
         </div>
       </div>

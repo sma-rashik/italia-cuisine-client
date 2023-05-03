@@ -87,7 +87,10 @@ const Login = () => {
                   name="password"
                 />
                 <label className="label">
-                  <Link href="#" className="label-text-alt link link-hover">
+                  <Link
+                    to="/register"
+                    className="label-text-alt link link-hover"
+                  >
                     Create an Account!!
                   </Link>
                 </label>
