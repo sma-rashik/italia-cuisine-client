@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import Recipes from "../Recipes/Recipes";
 
 const ChefDetails = () => {
   const { id } = useParams();
+
   const chefs = useLoaderData();
   console.log(chefs);
   const { name, picture, bio, experience_years, num_recipes, likes } = chefs;
@@ -15,13 +16,6 @@ const ChefDetails = () => {
           Chef
         </h1>
       </div>
-
-      {/* <div className="text-center ml-96 mt-10">
-        <h1 className="text-5xl text-center  max-w-md">
-          Journey Through the Tastes of{" "}
-          <span className="text-purple-700">{name}</span> 's Cooking
-        </h1>
-      </div> */}
 
       <div className="hero p-5 min-h-screen bg-base-200">
         <div className="hero-content flex-col  lg:flex-row">

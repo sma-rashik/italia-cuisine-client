@@ -1,11 +1,20 @@
-import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useRef, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import SocialButton from "../SocialButton/SocialButton";
+import { sendPasswordResetEmail } from "firebase/auth";
 
 const Login = () => {
   const { signIn } = useContext(AuthContext);
   const [error, setError] = useState("");
+  const { auth } = useContext(AuthContext);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+  const emailRef = useRef();
+
+  const from = location.state?.from?.pathname || "/";
+
   const handleLogin = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -17,9 +26,24 @@ const Login = () => {
         const loggedUser = result.user;
         console.log(loggedUser);
         form.reset();
+        navigate(from, { replace: true });
       })
       .catch((error) => {
         setError(error);
+      });
+  };
+
+  const handleResetPassword = (event) => {
+    const email = emailRef.current.value;
+    if (!email) {
+      alert("Please Provide your email address to reset password");
+    }
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        alert("Please Check Your mail");
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
   return (
@@ -47,6 +71,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="email"
+                  ref={emailRef}
                   className="input input-bordered"
                   name="email"
                 />
@@ -67,8 +92,12 @@ const Login = () => {
                   </Link>
                 </label>
               </div>
-              <div className="form-control mt-6">
+              <div className="form-control mt-6 ">
                 <button className="btn btn-primary">Login</button>
+                <small className="mt-3  btn-link">
+                  Forgot Password?{" "}
+                  <Link onClick={handleResetPassword}>Reset Password</Link>
+                </small>
               </div>
               {error && <p className="text-red-500 text-sm mt-4">{error}</p>}
             </form>

@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { FaCheck, FaThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Chef = ({ chef }) => {
   const { name, picture, id, experience_years, num_recipes, likes } = chef;
+  const { loading } = useContext(AuthContext);
+  if (loading) {
+    return (
+      <div className="text-center">
+        <progress className="progress w-56"></progress>
+      </div>
+    );
+  }
   return (
     <div>
       <div className=" mb-10 card card-compact w-96 bg-base-100 shadow-xl">
