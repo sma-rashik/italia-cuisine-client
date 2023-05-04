@@ -1,15 +1,17 @@
+import jsPDF from "jspdf";
 import React from "react";
-import { toPdf } from "react-to-pdf";
-
+import "jspdf-autotable";
 const Blog = () => {
-  const handleDownload = async () => {
-    const pdf = await toPdf(componentRef.current, {});
+  const handleDownloadPDF = () => {
+    // Create a new jsPDF instance
+    const doc = new jsPDF();
 
-    const blob = new Blob([pdf], { type: "application/pdf" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.download = "blog.pdf";
-    link.click();
+    // Add content to the PDF document
+    doc.text("Blog Page", 10, 10);
+    doc.autoTable({ html: "#blogTable" });
+
+    // Save the PDF document with a file name
+    doc.save("blog.pdf");
   };
   return (
     <div>
@@ -31,7 +33,7 @@ const Blog = () => {
             own state internally using the DOM API, and their state is not
             directly controlled by React.
           </p>
-          <button onClick={handleDownload} className="btn btn-link">
+          <button onClick={handleDownloadPDF} className="btn btn-link">
             Download PDF
           </button>
         </div>
@@ -50,6 +52,9 @@ const Blog = () => {
             prop is incorrect, it will give you an error message. It's like
             double-checking that the data you're receiving is what you expect.
           </p>
+          <button onClick={handleDownloadPDF} className="btn btn-link">
+            Download PDF
+          </button>
         </div>
       </div>
 
@@ -66,6 +71,9 @@ const Blog = () => {
             Express.js adds tools and libraries to create web applications and
             APIs more easily.
           </p>
+          <button onClick={handleDownloadPDF} className="btn btn-link">
+            Download PDF
+          </button>
         </div>
       </div>
 
@@ -80,6 +88,9 @@ const Blog = () => {
             share logic across multiple components. You can create a custom hook
             to avoid duplicating code and simplify your component's logic.
           </p>
+          <button onClick={handleDownloadPDF} className="btn btn-link">
+            Download PDF
+          </button>
         </div>
       </div>
     </div>
