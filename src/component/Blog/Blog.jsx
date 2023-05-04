@@ -3,16 +3,23 @@ import React from "react";
 import "jspdf-autotable";
 const Blog = () => {
   const handleDownloadPDF = () => {
-    // Create a new jsPDF instance
     const doc = new jsPDF();
 
-    // Add content to the PDF document
-    doc.text("Blog Page", 10, 10);
-    doc.autoTable({ html: "#blogTable" });
+    // Loop through all the collapse elements
+    const collapses = document.querySelectorAll(".collapse");
+    collapses.forEach((collapse, index) => {
+      // Get the title and content of each collapse element
+      const title = collapse.querySelector(".collapse-title").textContent;
+      const content = collapse.querySelector(".collapse-content").textContent;
 
-    // Save the PDF document with a file name
-    doc.save("blog.pdf");
+      // Add the title and content to the PDF document
+      doc.text(`${index + 1}) ${title}`, 10, 10 + index * 60);
+      doc.text(content, 10, 20 + index * 60);
+    });
+
+    doc.save("questions.pdf");
   };
+
   return (
     <div>
       <div className="page-banner w-full">
@@ -80,7 +87,7 @@ const Blog = () => {
       <div className="collapse mt-10 mb-12 text-center">
         <input type="checkbox" />
         <div className="collapse-title text-xl font-medium">
-          3) What is a custom hook, and why will you create a custom hook?
+          4) What is a custom hook, and why will you create a custom hook?
         </div>
         <div className="collapse-content">
           <p>
