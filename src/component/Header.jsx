@@ -16,7 +16,7 @@ const Header = () => {
 
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div className="navbar pl-10 pr-10 bg-base-100">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -54,7 +54,12 @@ const Header = () => {
               </li>
             </ul>
           </div>
-          <a className="btn btn-ghost   normal-case text-xl">Cucina d'Italia</a>
+          <Link
+            to="/"
+            className="normal-case text-xl hover:underline hover:text-2xl hover:text-purple-700"
+          >
+            Cucina d'Italia
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">
@@ -77,9 +82,13 @@ const Header = () => {
           {user ? (
             <div>
               <div className="avatar">
-                <div className="w-8  rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <div className="w-8 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                   {user.photoURL ? (
-                    <img src={user.photoURL} alt={user.displayName} />
+                    <img
+                      src={user.photoURL}
+                      alt={user.displayName}
+                      title={user.displayName}
+                    />
                   ) : (
                     <img src="https://i.ibb.co/zRCMzv0/download.jpg" alt="" />
                   )}
@@ -87,15 +96,14 @@ const Header = () => {
               </div>
               <Link onClick={handleLogOut} className="btn ml-4">
                 Log Out
-              </Link>{" "}
+              </Link>
             </div>
           ) : (
             <div>
-              {" "}
-              <Link className="btn mr-5" to="/login">
+              <Link className="btn btn-link mr-5" to="/login">
                 Sign In
               </Link>{" "}
-              <Link className="btn mr-5" to="/register">
+              <Link className="btn btn-link mr-5" to="/register">
                 Sign Up
               </Link>
             </div>

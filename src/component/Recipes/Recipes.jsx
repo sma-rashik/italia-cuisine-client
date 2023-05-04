@@ -7,14 +7,10 @@ import "react-toastify/dist/ReactToastify.css";
 const Recipes = ({ chefs }) => {
   const [favorites, setFavorites] = useState([]);
 
-  const handleFavoriteClick = (recipe) => {
-    setFavorites([...favorites, recipe]);
-    toast.success(`Added ${recipe.name} to favorites!`);
-  };
-
   const handleAddToFavorites = (recipe) => {
     const updatedRecipes = chefs.recipes.map((r) => {
-      if (r.name == recipe.name) {
+      setFavorites([...favorites, recipe]);
+      if (r.name === recipe.name) {
         r.isFavorite = true;
       }
       return r;
@@ -22,14 +18,8 @@ const Recipes = ({ chefs }) => {
 
     setChefs({ ...chefs, recipes: updatedRecipes });
     setFavorites([...favorites, recipe]);
-    toast.success(`"${recipe.name}" is now your favorite!`, {
-      position: "top-center",
-      autoClose: 2000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+    toast.success(`${recipe.name} added to favorites!`, {
+      position: toast.POSITION.TOP_RIGHT,
     });
   };
 
@@ -62,7 +52,11 @@ const Recipes = ({ chefs }) => {
                   {recipe.rating}
                 </span>
                 <button
-                  className="text-white mt-10 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  className={`${
+                    recipe.isFavorite
+                      ? "bg-gray-400 cursor-default"
+                      : "btn btn-primary"
+                  } text-white mt-10 font-medium rounded-lg text-sm px-5 py-2.5 text-center`}
                   disabled={recipe.isFavorite}
                   onClick={() => handleAddToFavorites(recipe)}
                 >

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
 import { useState } from "react";
 import SocialButton from "../SocialButton/SocialButton";
@@ -7,7 +7,11 @@ import SocialButton from "../SocialButton/SocialButton";
 const Register = () => {
   const { createUser } = useContext(AuthContext);
   const [error, setError] = useState(null);
+  const { user } = useContext(AuthContext);
 
+  if (user) {
+    <Navigate to="/" />;
+  }
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;

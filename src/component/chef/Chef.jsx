@@ -32,7 +32,8 @@ const Chef = ({ chef }) => {
               <FaCheck className="mt-1" /> Number of Recipes: {num_recipes}
             </p>
             <p className="flex ml-20 mt-4 text-center text-lg gap-2">
-              <FaThumbsUp className="mt-1 text-red-600" /> Total Likes: {likes}
+              <FaThumbsUp className="mt-1 text-purple-700" /> Total Likes:{" "}
+              {likes}
             </p>
           </div>
           <div className="card-actions justify-end">

@@ -38,7 +38,9 @@ const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:4000/chef/${params.chefId}`),
+          fetch(
+            `https://italia-chef-server-sma-rashik.vercel.app/chef/${params.chefId}`
+          ),
       },
     ],
   },
