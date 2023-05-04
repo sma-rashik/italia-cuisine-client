@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { FaCheck, FaThumbsUp } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../AuthProvider/AuthProvider";
-import { ToastContainer } from "react-toastify";
+import LazyLoad from "react-lazyload";
 
 const Chef = ({ chef }) => {
   const { name, picture, id, experience_years, num_recipes, likes } = chef;
@@ -16,11 +16,11 @@ const Chef = ({ chef }) => {
   }
   return (
     <div>
-      <ToastContainer />
-
       <div className=" mb-10 card card-compact w-96 bg-base-100 shadow-xl">
         <figure>
-          <img className="h-64 w-64 " src={picture} alt="Chef" />
+          <LazyLoad height={200} once>
+            <img className="h-64 w-64 " src={picture} alt="Chef" />
+          </LazyLoad>
         </figure>
         <div className="card-body ">
           <h2 className="text-center text-3xl text-indigo-900">{name}</h2>
