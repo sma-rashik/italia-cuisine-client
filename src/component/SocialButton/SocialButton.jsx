@@ -38,7 +38,7 @@ const SocialButton = () => {
   };
 
   return (
-    <div>
+    <div className="text-center">
       <button
         onClick={handleGoogleSignIn}
         className="btn btn-outline btn-success"
@@ -50,10 +50,10 @@ const SocialButton = () => {
       </button>
       <button
         onClick={handleGithubSIgnIn}
-        className="btn btn-outline ml-2 btn-info"
+        className="btn btn-outline m-2 btn-info"
       >
         Sign in With Github
-        <div className="text-xl ml-2">
+        <div className="text-xl m-2">
           <FaGithub />
         </div>
       </button>

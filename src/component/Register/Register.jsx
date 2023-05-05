@@ -5,13 +5,9 @@ import { useState } from "react";
 import SocialButton from "../SocialButton/SocialButton";
 
 const Register = () => {
-  const { createUser } = useContext(AuthContext);
+  const { createUser, user } = useContext(AuthContext);
   const [error, setError] = useState(null);
-  const { user } = useContext(AuthContext);
 
-  if (user) {
-    <Navigate to="/" />;
-  }
   const handleRegister = (event) => {
     event.preventDefault();
     const form = event.target;
@@ -35,6 +31,7 @@ const Register = () => {
         const result = createUser(email, password);
         const loggedUser = result.user;
         console.log(loggedUser);
+        <Navigate to="/" />;
       } else {
         throw new Error("createUser function not found in AuthContext");
       }
@@ -43,7 +40,6 @@ const Register = () => {
       setError(error.message);
     }
   };
-
   return (
     <div>
       <div>
@@ -72,6 +68,7 @@ const Register = () => {
                     placeholder="name"
                     className="input input-bordered"
                     name="name"
+                    required
                   />
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -81,6 +78,7 @@ const Register = () => {
                     placeholder="email"
                     className="input input-bordered"
                     name="email"
+                    required
                   />
                 </div>
                 <div className="form-control">
@@ -92,6 +90,7 @@ const Register = () => {
                     placeholder="password"
                     className="input input-bordered"
                     name="password"
+                    required
                   />{" "}
                   <label className="label">
                     <span className="label-text">Photo Url</span>
@@ -101,6 +100,7 @@ const Register = () => {
                     placeholder="Photo Url"
                     className="input input-bordered"
                     name="photo"
+                    required
                   />
                   {error && (
                     <div className="text-red-500 text-sm mt-4">{error}</div>

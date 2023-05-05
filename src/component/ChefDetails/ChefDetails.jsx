@@ -1,7 +1,6 @@
 import React from "react";
 import { useLoaderData, useParams } from "react-router-dom";
 import Recipes from "../Recipes/Recipes";
-import { ToastContainer } from "react-toastify";
 
 const ChefDetails = () => {
   const { id } = useParams();
@@ -36,7 +35,7 @@ const ChefDetails = () => {
           </div>
         </div>
       </div>
-      <ToastContainer />
+
       <Recipes chefs={chefs}></Recipes>
     </div>
   );

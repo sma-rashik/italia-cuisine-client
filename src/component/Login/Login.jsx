@@ -43,7 +43,9 @@ const Login = () => {
         alert("Please Check Your mail");
       })
       .catch((error) => {
-        console.log(error);
+        setError(
+          "No user found with provided email. Please check the email and try again."
+        );
       });
   };
   return (
@@ -74,6 +76,7 @@ const Login = () => {
                   ref={emailRef}
                   className="input input-bordered"
                   name="email"
+                  required
                 />
               </div>
               <div className="form-control">
@@ -85,6 +88,7 @@ const Login = () => {
                   placeholder="password"
                   className="input input-bordered"
                   name="password"
+                  required
                 />
                 <label className="label">
                   <Link

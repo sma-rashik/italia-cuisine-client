@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import Rating from "react-rating";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Recipes = ({ chefs }) => {
@@ -41,7 +41,14 @@ const Recipes = ({ chefs }) => {
               <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">
                 {recipe.name}
               </h5>
-              <div className="flex items-center justify-between">
+              <ul className="text-gray-700 dark:text-gray-400 mt-2">
+                {recipe.ingredients.map((ingredient, index) => (
+                  <li key={index} className="ml-4 list-disc">
+                    {ingredient}
+                  </li>
+                ))}
+              </ul>
+              <div className="flex items-center justify-between mt-2">
                 <span className=" font-bold text-gray-900 dark:text-white">
                   <Rating
                     placeholderRating={recipe.rating}
@@ -65,6 +72,7 @@ const Recipes = ({ chefs }) => {
                     : "Add to Favorites"}
                 </button>
               </div>
+              <ToastContainer />
             </div>
           </div>
         ))}
